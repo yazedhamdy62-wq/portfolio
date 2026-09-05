@@ -127,6 +127,10 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+// ===== ضع مفتاح Web3Forms الخاص بك هنا (Access Key) =====
+// احصل عليه مجانًا من: https://web3forms.com
+const WEB3FORMS_ACCESS_KEY = 'a44621e3-85f9-42e2-9c70-5f3444a0e47f';
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -152,16 +156,43 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  // ===== محاكاة الإرسال (استبدلها بربط API حقيقي عند الحاجة) =====
+  // ===== إرسال البيانات فعليًا عبر Web3Forms (بدون باك اند) =====
   submitBtn.disabled = true;
   submitLabel.textContent = 'SENDING...';
+  statusEl.textContent = '';
+  statusEl.className = 'form-status';
 
-  setTimeout(() => {
-    statusEl.textContent = "Message sent successfully. I'll get back to you soon.";
-    statusEl.className = 'form-status success';
-
-    form.reset();
-    submitBtn.disabled = false;
-    submitLabel.textContent = 'TRANSMIT MESSAGE';
-  }, 1200);
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_ACCESS_KEY,
+      name: fields.name.value.trim(),
+      email: fields.email.value.trim(),
+      subject: fields.subject.value.trim(),
+      message: fields.message.value.trim()
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        statusEl.textContent = "Message sent successfully. I'll get back to you soon.";
+        statusEl.className = 'form-status success';
+        form.reset();
+      } else {
+        statusEl.textContent = 'Something went wrong. Please try again or email me directly.';
+        statusEl.className = 'form-status error';
+      }
+    })
+    .catch(() => {
+      statusEl.textContent = 'Network error. Please check your connection and try again.';
+      statusEl.className = 'form-status error';
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitLabel.textContent = 'TRANSMIT MESSAGE';
+    });
 });

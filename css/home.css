@@ -882,3 +882,8 @@ body{
 .nav-links {
   margin: 0 auto;
 }
+.contact{
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  text-decoration: none;
+}
