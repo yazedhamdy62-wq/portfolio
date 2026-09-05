@@ -1,0 +1,167 @@
+// ===== Reveal elements progressively as the user scrolls down =====
+// كل عنصر يظهر بحركة "fade + slide up" ومعاه تأخير بسيط
+// وكل عنصر جوه نفس المجموعة (زي الكروت) بياخد تأخير أكبر شوية عن اللي قبله
+
+const revealEls = document.querySelectorAll('.reveal');
+
+// نجمع العناصر حسب الأب (parent) عشان نعمل delay متتالي للعناصر
+// اللي بتظهر مع بعض في نفس الوقت (زي كروت الأعمال)
+const groups = new Map();
+
+revealEls.forEach(el => {
+  const parent = el.parentElement;
+  if (!groups.has(parent)) groups.set(parent, []);
+  groups.get(parent).push(el);
+});
+
+groups.forEach(group => {
+  group.forEach((el, index) => {
+    el.style.transitionDelay = `${index * 0.15}s`;
+  });
+});
+
+// ===== IntersectionObserver: يضيف الكلاس in-view أول ما العنصر يدخل الشاشة =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target); // يظهر مرة واحدة بس
+    }
+  });
+}, {
+  threshold: 0.15,
+  rootMargin: '0px 0px -60px 0px'
+});
+
+revealEls.forEach(el => observer.observe(el));
+// ===== إعدادات عامة =====
+const navbar   = document.getElementById('navbar');
+const navLinks = document.getElementById('navLinks');
+const burger   = document.getElementById('burger');
+const links    = document.querySelectorAll('[data-link]');
+const sections = document.querySelectorAll('.section');
+
+// ===== 1) تمرير سموز عند الضغط على أي رابط =====
+links.forEach(link => {
+  link.addEventListener('click', (e) => {
+    const targetId = link.getAttribute('href');
+    if (targetId && targetId.startsWith('#')) {
+      e.preventDefault();
+      const target = document.querySelector(targetId);
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+      // إغلاق المنيو في الموبايل بعد اختيار رابط
+      navLinks.classList.remove('open');
+      burger.classList.remove('open');
+    }
+  });
+});
+
+// ===== 2) تغيير شكل النافبار عند السكرول =====
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 30) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// ===== 3) تفعيل الرابط النشط حسب القسم الظاهر (IntersectionObserver) =====
+const navLinkEls = document.querySelectorAll('.nav-link');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navLinkEls.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, {
+  threshold: 0.5
+});
+
+sections.forEach(section => navObserver.observe(section));
+
+// ===== 4) قائمة الموبايل (Burger Menu) =====
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  burger.classList.toggle('open');
+});
+
+/**
+ * contact-script.js
+ * ---------------------------------------------------------
+ * كود صفحة الكونتاكت بس: تحقق بسيط من الفورم + رسالة تأكيد
+ * عند الإرسال. مفيهوش أي كود خاص بالنافبار أو الفوتر.
+ * ---------------------------------------------------------
+ */
+
+const form         = document.getElementById('contactForm');
+const submitBtn    = form.querySelector('.submit-btn');
+const submitLabel  = document.getElementById('submitLabel');
+const statusEl     = document.getElementById('formStatus');
+
+const fields = {
+  name:    document.getElementById('name'),
+  email:   document.getElementById('email'),
+  subject: document.getElementById('subject'),
+  message: document.getElementById('message'),
+};
+
+// ===== إزالة حالة الخطأ أول ما المستخدم يبدأ يكتب =====
+Object.values(fields).forEach(field => {
+  field.addEventListener('input', () => field.classList.remove('error'));
+});
+
+// ===== دالة بسيطة للتحقق من صحة الإيميل =====
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  let isValid = true;
+
+  // تحقق من الحقول الفاضية
+  Object.values(fields).forEach(field => {
+    if (!field.value.trim()) {
+      field.classList.add('error');
+      isValid = false;
+    }
+  });
+
+  // تحقق من صيغة الإيميل
+  if (fields.email.value.trim() && !isValidEmail(fields.email.value.trim())) {
+    fields.email.classList.add('error');
+    isValid = false;
+  }
+
+  if (!isValid) {
+    statusEl.textContent = 'Please fill in all fields correctly.';
+    statusEl.className = 'form-status error';
+    return;
+  }
+
+  // ===== محاكاة الإرسال (استبدلها بربط API حقيقي عند الحاجة) =====
+  submitBtn.disabled = true;
+  submitLabel.textContent = 'SENDING...';
+
+  setTimeout(() => {
+    statusEl.textContent = "Message sent successfully. I'll get back to you soon.";
+    statusEl.className = 'form-status success';
+
+    form.reset();
+    submitBtn.disabled = false;
+    submitLabel.textContent = 'TRANSMIT MESSAGE';
+  }, 1200);
+});

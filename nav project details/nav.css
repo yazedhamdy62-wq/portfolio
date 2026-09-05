@@ -1,0 +1,240 @@
+:root{
+  --bg: #0a0e1a;
+  --bg-alt: #0d1220;
+  --navbar-bg: rgba(10, 14, 26, 0.85);
+  --text: #e8edf5;
+  --text-dim: #8b93a7;
+  --accent: #f4a583;
+  --accent-soft: rgba(244, 165, 131, 0.12);
+  --border: rgba(232, 237, 245, 0.08);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.scrolled{
+  background: var(--bg);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+.nav-inner{
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Logo */
+.logo{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.logo-icon{
+  color: var(--accent);
+  display: flex;
+}
+
+.logo-text{
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+}
+
+.logo-sub{
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+/* Links */
+.nav-links{
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-link{
+  position: relative;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 6px 2px;
+  transition: color 0.25s ease;
+}
+
+.nav-link::after{
+  content:"";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover{
+  color: var(--text);
+}
+
+.nav-link:hover::after{
+  width: 100%;
+}
+
+.nav-link.active{
+  color: var(--accent);
+}
+
+.nav-link.active::after{
+  width: 100%;
+}
+
+/* Book a call button */
+.book-call{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.book-call:hover{
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.arrow{
+  transition: transform 0.3s ease;
+}
+
+.book-call:hover .arrow{
+  transform: translateX(4px);
+}
+
+/* Burger (mobile) */
+.burger{
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.burger span{
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.burger.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2){ opacity: 0; }
+.burger.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+/* ===== DEMO SECTIONS ===== */
+.section{
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 60px;
+  background: var(--bg);
+}
+
+.section.alt{
+  background: var(--bg-alt);
+}
+
+.section h1{
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.section h2{
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.accent{ color: var(--accent); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 860px){
+  .nav-links{
+    position: fixed;
+    top: 66px;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links.open{
+    max-height: 320px;
+  }
+
+  .nav-link{
+    padding: 16px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .book-call{
+    display: none;
+  }
+
+  .burger{
+    display: flex;
+  }
+}
