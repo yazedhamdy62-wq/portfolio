@@ -73,6 +73,10 @@ window.addEventListener('scroll', () => {
 // ===== 3) تفعيل الرابط النشط حسب القسم الظاهر (IntersectionObserver) =====
 const navLinkEls = document.querySelectorAll('.nav-link');
 
+// ملحوظة: تم استبدال threshold: 0.5 بـ rootMargin بيعمل "شريط" رفيع في نص الشاشة
+// السبب: سكاشن زي works أطول من الشاشة فمينفعش توصل 50% ظاهر منها أبدًا
+// فكانت الكلاس active بتاعتها ماتتفعلش. دلوقتي الاكتيف بيتحدد لما حدود
+// السكشن تعدي من نص الشاشة، بغض النظر عن طول السكشن.
 const navObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -86,7 +90,8 @@ const navObserver = new IntersectionObserver((entries) => {
     }
   });
 }, {
-  threshold: 0.5
+  threshold: 0,
+  rootMargin: '-45% 0px -50% 0px'
 });
 
 sections.forEach(section => navObserver.observe(section));

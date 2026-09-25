@@ -92,6 +92,15 @@ body{
 .icon-js{ top: 10%; left: 6%; }
 .icon-css{ top: 40%; left: 58%; }
 .icon-html{ top: 68%; left: 18%; }
+.icon-excel{ top: 2%; left: 74%; }
+.icon-powerbi{ top: 70%; left: 56%; }
+
+/* صور اللوجو بتاعة الإكسيل وباور بي إي جايه بخلفية بيضا، فمسحنا الزوايا
+   عشان تندمج مع كارت الأيقونة الداكن بنفس شكل باقي الأيقونات */
+.icon-excel img,
+.icon-powerbi img{
+  border-radius: 10px;
+}
 
 @keyframes floatIcon{
   0%, 100%{ transform: translateY(0) rotate(0deg); }
@@ -652,6 +661,8 @@ body{
   padding: 90px 60px 50px;
   max-width: 1300px;
   margin: 0 auto;
+  min-height: auto;
+  justify-content: flex-start;
 }
 
 .badge{
@@ -860,6 +871,9 @@ body{
   .form-row{ grid-template-columns: 1fr; }
   .hero-title{ font-size: 38px; }
   .contact-hero, .contact-content{ padding-left: 24px; padding-right: 24px; }
+  .contact-hero{ padding-top: 60px; padding-bottom: 30px; }
+  .contact-content{ padding-top: 10px; padding-bottom: 60px; gap: 20px; }
+  .channels-card, .contact-form{ padding: 24px; }
 }
 /* ===== توسيط الروابط في النافبار ===== */
 .nav-links {
