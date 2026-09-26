@@ -86,7 +86,10 @@ const navObserver = new IntersectionObserver((entries) => {
     }
   });
 }, {
-  threshold: 0.5
+  // بدل ما نعتمد على نسبة 50% من طول السكشن (بيفشل مع السكاشن الطويلة زي works)
+  // بنعمل "خط تفعيل" وهمي في نص الشاشة تقريبًا، وأول سكشن يقطعه بيبقى هو الـ active
+  threshold: 0,
+  rootMargin: '-45% 0px -45% 0px'
 });
 
 sections.forEach(section => navObserver.observe(section));
