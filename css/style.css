@@ -564,3 +564,40 @@ section + section{ margin-top: 96px; }
 @media (max-width: 680px){
   .pnav__inner{ padding: 0 20px; }
 }
+
+/* ===== Warning notice (add to the end of style.css) ===== */
+.notice{
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 40px;
+  padding: 22px 24px;
+  border-radius: 14px;
+  background: rgba(255, 193, 7, .08);
+  border: 1px solid rgba(255, 193, 7, .35);
+  color: #ffc107;
+}
+.notice > svg{ flex-shrink: 0; margin-top: 2px; }
+.notice__title{ font-size: 17px; margin-bottom: 8px; color: #ffd75e; }
+.notice p{ font-size: 14px; line-height: 1.65; }
+.notice p + p{ margin-top: 8px; }
+
+/* ===== Video card ===== */
+.video-card{
+  max-width: 880px;
+  margin: 0 auto 28px;
+  padding: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.video-card__frame{ aspect-ratio: 16 / 9; background: #05070f; border-radius: 10px; overflow: hidden; }
+.video-card__frame video{ width: 100%; height: 100%; object-fit: contain; display: block; }
+.video-card__caption{
+  padding: 14px 12px 12px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-dim);
+  text-align: center;
+}
