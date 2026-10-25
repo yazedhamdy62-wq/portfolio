@@ -36,6 +36,7 @@ const observer = new IntersectionObserver((entries) => {
 revealEls.forEach(el => observer.observe(el));
 // ===== إعدادات عامة =====
 const navbar   = document.getElementById('navbar');
+const navbarDesktop = document.getElementById('navbarDesktop');
 const navLinks = document.getElementById('navLinks');
 const burger   = document.getElementById('burger');
 const links    = document.querySelectorAll('[data-link]');
@@ -63,15 +64,13 @@ links.forEach(link => {
 
 // ===== 2) تغيير شكل النافبار عند السكرول =====
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 30) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
+  const scrolled = window.scrollY > 30;
+  navbar.classList.toggle('scrolled', scrolled);
+  if (navbarDesktop) navbarDesktop.classList.toggle('scrolled', scrolled);
 });
 
 // ===== 3) تفعيل الرابط النشط حسب القسم الظاهر (IntersectionObserver) =====
-const navLinkEls = document.querySelectorAll('.nav-link');
+const navLinkEls = document.querySelectorAll('.nav-link, .dlink');
 
 const navObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -199,3 +198,35 @@ form.addEventListener('submit', (e) => {
       submitLabel.textContent = 'TRANSMIT MESSAGE';
     });
 });
+
+/* =====================================================================
+   HERO COUNTERS – بيعدّوا من 0 للرقم الحقيقي أول ما الصفحة تفتح
+   - Projects built: بيعدّ كروت .work-card جوه #works تلقائيًا
+   - Tools in my stack: بيعدّ .skill-item جوه #skills (ولو مفيش، بياخد data-fallback)
+   ===================================================================== */
+(function () {
+  const counters = document.querySelectorAll('.stat-num');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function getTarget(el) {
+    const sel = el.dataset.countSelector;
+    let n = sel ? document.querySelectorAll(sel).length : 0;
+    if (!n) n = parseInt(el.dataset.fallback || '0', 10);
+    return n;
+  }
+
+  function animate(el, target, duration) {
+    if (reduceMotion || target === 0) { el.textContent = target; return; }
+    const start = performance.now();
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
+    (function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      el.textContent = Math.round(easeOut(p) * target);
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => counters.forEach(el => animate(el, getTarget(el), 1600)), 350);
+  });
+})();
