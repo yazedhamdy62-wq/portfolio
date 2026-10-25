@@ -1085,3 +1085,9 @@ html{ scroll-behavior: smooth; }
   .skill-card-head h3{ font-size: 22px; }
   .skill-item{ padding: 10px 16px; font-size: 15px; }
 }
+
+/* ---------- Mobile menu: no stray line under the navbar when closed ---------- */
+@media (max-width: 860px){
+  .nav-links{ top: 61px; border-bottom: 0; }
+  .nav-links.open{ border-bottom: 1px solid var(--border); }
+}
