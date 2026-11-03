@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VANTA E-commerce Website — Yazed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="pnav" id="pnav">
+  <div class="pnav__inner">
+    <a href="./index.html" class="pnav__logo" aria-label="Back to home">Yazed<span>.</span></a>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- HERO / BRIEF -->
+  <section class="hero">
+    <div class="hero__text">
+      <span class="badge"><i class="badge__dot"></i>Web Development / E-commerce</span>
+      <h1 class="hero__title">VANTA<br>E-commerce<br>Website</h1>
+      <p class="hero__desc">VANTA is a concept online store for a high-fashion streetwear brand. It is a complete shopping experience: a landing page, a shop with filters and sorting, a product page, a wishlist, a shopping bag, and a full checkout.
+
+Visitors can browse the collection, save pieces they like, add items to their bag, and place an order, while Supabase stores the orders, contact messages, and newsletter signups behind the scenes.</p>
+    </div>
+    <div class="hero__panel">
+      <div class="mock-window">
+        <img src="./img/vanta/VANTA Minimalist Wordmark on Black.png" alt="VANTA landing page preview" class="hero-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM + SOLUTION + SIDEBAR -->
+  <section class="content-grid">
+    <div class="content-main">
+
+      <div class="statement">
+        <span class="statement__bar"></span>
+        <h2>The Problem</h2>
+        <p>Most of my earlier projects were single pages, so I never had to think about how a whole website works together. There was no shopping bag that follows you from page to page, no way to save a favourite, and nothing that recorded an order.</p>
+        <p>I wanted to learn how a real online store is organised: how pages share information, how a customer moves from browsing to buying, and what happens to an order once it is placed.</p>
+      </div>
+
+      <div class="statement statement--solution">
+        <h2>The Solution</h2>
+        <p>I designed and built the store as a set of connected pages: a landing page, a shop, a product page, a wishlist, and a checkout. The shop has category tabs, filters for size, colour, and price, sorting, and a grid or list view. Each product page has a photo gallery, size and colour selection, an add-to-bag button, and a one-click buy now.</p>
+        <p>The shopping bag and the wishlist are saved in the browser, so they stay up to date on every page. The checkout validates the customer details, works out shipping, tax, and promo codes, and saves the order to a Supabase database. The navbar and footer are shared components, so a change in one place updates every page.</p>
+        <p>This project taught me how a multi-page website is structured, how to keep information between pages, and how a front-end talks to a database. It is the base I will build on in my next projects.</p>
+      </div>
+
+      <!-- WARNING -->
+      <div class="notice" role="note">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div>
+          <h3 class="notice__title">Heads up: this is a demo</h3>
+          <p>VANTA is a concept project built for learning and for my portfolio. The brand, products, and prices are not real, no payment is taken, and nothing will be shipped. Please do not enter real card details in the checkout.</p>
+          <p>The order form, contact form, and newsletter use Supabase's free plan, which pauses a database after about a week of inactivity. If one of them fails, the database is probably paused, and you can still browse the whole store.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="stack-card">
+        <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Tech Stack</h3>
+
+        <p class="stack-group__label">front-end</p>
+        <div class="tag-row">
+          <span class="tag">html</span><span class="tag">css</span><span class="tag">javascript</span>
+        </div>
+
+        <p class="stack-group__label">back-end</p>
+        <div class="tag-row">
+          <span class="tag">supabase</span><span class="tag">postgresql</span>
+        </div>
+
+        <p class="stack-group__label">hosted on</p>
+        <div class="tag-row">
+          <span class="tag">github pages</span>
+        </div>
+
+        <p class="stack-group__label">made by</p>
+        <div class="tag-row">
+          <span class="tag">Yazed(me)</span>
+        </div>
+      </div>
+
+      <div class="dl-card dl-desktop">
+        <h3 class="dl-card__title">Live Demo</h3>
+        <p class="dl-card__desc">Browse the collection, save pieces to your wishlist, add items to your bag, and try the checkout. Orders are test orders only.</p>
+        <a href="https://yazedhamdy62-wq.github.io/vanta.project.com/" target="_blank" rel="noopener" class="btn btn--primary dl-card__btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Try Demo</a>
+      </div>
+    </aside>
+  </section>
+
+  <!-- PROJECT GALLERY -->
+  <section class="section gallery">
+    <h2 class="gallery__title">Project gallery</h2>
+
+    <div class="gallery__grid">
+      <button class="gallery__item" data-caption="Landing page">
+        <img src="./img/vanta/1 (6).png" alt="Landing page">
+      </button>
+      <button class="gallery__item" data-caption="Shop page">
+        <img src="./img/vanta/1 (5).png" alt="Shop page with filters and sorting">
+      </button>
+      <button class="gallery__item" data-caption="Product page">
+        <img src="./img/vanta/1 (4).png" alt="Product page">
+      </button>
+      <button class="gallery__item" data-caption="Wishlist">
+        <img src="./img/vanta/1 (3).png" alt="Wishlist page">
+      </button>
+      <button class="gallery__item" data-caption="Checkout">
+        <img src="./img/vanta/1 (2).png" alt="Checkout page">
+      </button>
+      <button class="gallery__item" data-caption="Checkout">
+        <img src="./img/vanta/1 (1).png" alt="Checkout page">
+      </button>
+    </div>
+  </section>
+
+  <!-- TRY DEMO (mobile) -->
+  <section class="section download dl-mobile">
+    <div class="dl-card">
+      <h3 class="dl-card__title">Live Demo</h3>
+      <p class="dl-card__desc">Browse the collection, save pieces to your wishlist, add items to your bag, and try the checkout. Orders are test orders only.</p>
+      <a href="https://yazedhamdy62-wq.github.io/vanta.project.com/" target="_blank" rel="noopener" class="btn btn--primary dl-card__btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Try Demo</a>
+    </div>
+  </section>
+
+</main>
+
+<script src="./js/script.js"></script>
+</body>
+</html>
