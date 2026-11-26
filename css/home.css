@@ -1091,3 +1091,42 @@ html{ scroll-behavior: smooth; }
   .nav-links{ top: 61px; border-bottom: 0; }
   .nav-links.open{ border-bottom: 1px solid var(--border); }
 }
+
+/* ===== DESKTOP PROJECT CARDS: 3 per row, same frame, no crop, no side bars ===== */
+@media (min-width: 961px){
+  .works-grid{ grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .work-card .preview-body{
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: #0b0f1c;
+  }
+  .work-card .preview-body::before{
+    content: "";
+    position: absolute;
+    inset: -24px;
+    background: var(--shot) center / cover no-repeat;
+    filter: blur(22px) brightness(.55) saturate(1.1);
+  }
+  .work-card .work-img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+  .work-card .work-info{ padding: 20px; }
+  .work-card .work-heading h3{ font-size: 18px; }
+  .work-card .work-info p{
+    font-size: 13px;
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .work-card .tags{ flex-wrap: wrap; gap: 8px; }
+  .work-card .tags{ margin-bottom: 16px; }
+  .work-card .work-details-btn{ margin-top: auto; }
+}
